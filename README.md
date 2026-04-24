@@ -1,6 +1,6 @@
 # 🎓 Blockchain Certificate Verification DApp
 
-Hệ thống xác minh chứng chỉ số hóa sử dụng công nghệ Blockchain để đảm bảo tính minh bạch và chống giả mạo tuyệt đối.
+Hệ thống xác minh chứng chỉ số hóa sử dụng công nghệ Blockchain để đảm bảo tính minh bạch và chống giả mạo .
 
 ---
 
