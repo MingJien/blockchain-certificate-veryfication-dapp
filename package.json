@@ -1,0 +1,33 @@
+{
+  "name": "blockchain-certificate-dapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:backend": "npm --prefix backend start",
+    "start:frontend": "npm --prefix frontend run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MingJien/blockchain-certificate-dapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MingJien/blockchain-certificate-dapp/issues"
+  },
+  "homepage": "https://github.com/MingJien/blockchain-certificate-dapp#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "crypto": "^1.0.1",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mssql": "^12.3.1"
+  }
+}
