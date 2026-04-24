@@ -1,0 +1,189 @@
+{
+  "info": {
+    "_postman_id": "57f561d6-a8cf-44ad-a052-4f805ec446b1",
+    "name": "Certificate DApp API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Production flow: issue -> get detail -> verify -> revoke"
+  },
+  "item": [
+    {
+      "name": "1. Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "2. Issue Certificate (POST /api/certificates)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status is 201', function () {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "",
+              "const json = pm.response.json();",
+              "if (json && json.data) {",
+              "  pm.environment.set('certificateId', String(json.data.certificateId || json.data.id || ''));",
+              "  pm.environment.set('dataHash', String(json.data.dataHash || ''));",
+              "  pm.environment.set('txHash', String(json.data.blockchainTxHash || ''));",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "x-wallet-address",
+            "value": "{{requesterWallet}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"studentId\": {{studentId}},\n  \"issuerId\": {{issuerId}},\n  \"courseName\": \"{{courseName}}\",\n  \"issueDate\": \"{{issueDate}}\",\n  \"metadataURI\": \"{{metadataURI}}\",\n  \"contractAddress\": \"{{contractAddress}}\",\n  \"requesterWallet\": \"{{requesterWallet}}\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/certificates",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "certificates"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "3. Get Certificate Detail (GET /api/certificates/:id)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/certificates/{{certificateId}}?contractAddress={{contractAddress}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "certificates",
+            "{{certificateId}}"
+          ],
+          "query": [
+            {
+              "key": "contractAddress",
+              "value": "{{contractAddress}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "4. Verify By ID (GET /api/verify/:id)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/verify/{{certificateId}}?contractAddress={{contractAddress}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "verify",
+            "{{certificateId}}"
+          ],
+          "query": [
+            {
+              "key": "contractAddress",
+              "value": "{{contractAddress}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "5. Verify By Hash (GET /api/verify/hash/:hash)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/verify/hash/{{dataHash}}?contractAddress={{contractAddress}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "verify",
+            "hash",
+            "{{dataHash}}"
+          ],
+          "query": [
+            {
+              "key": "contractAddress",
+              "value": "{{contractAddress}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "6. Revoke Certificate (PUT /api/certificates/:id/revoke)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "x-wallet-address",
+            "value": "{{requesterWallet}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"contractAddress\": \"{{contractAddress}}\",\n  \"requesterWallet\": \"{{requesterWallet}}\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/certificates/{{certificateId}}/revoke",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "certificates",
+            "{{certificateId}}",
+            "revoke"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
