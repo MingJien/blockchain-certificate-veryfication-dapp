@@ -31,3 +31,19 @@ If you have an artifact JSON containing ABI+bytecode:
   cd smart-contract/scripts
   node deploy.js
   ```
+
+
+## 1. Thông tin hợp đồng
+1. Contract Address:
+0x817467672402cD1D14d337E99b568166aaDCa098 
+2. Link Explorer (Blockscout):
+https://eth-sepolia.blockscout.com/address/0x817467672402cD1D14d337E99b568166aaDCa098?tab=contract 
+3. Transaction Deploy (Etherscan):
+https://sepolia.etherscan.io/tx/0xb1cec2411beea4e201f37666085884067c6ae637763783c1ac47a3354e8c5622 
+4. Transaction Deploy (Blockscout):
+https://eth-sepolia.blockscout.com/tx/0xb1cec2411beea4e201f37666085884067c6ae637763783c1ac47a3354e8c5622
+## 2.Cấu hình MetaMask
+1. Network Name: Sepolia Test Network 
+2. RPC URL: https://rpc.sepolia.org 
+3. Chain ID: 11155111 
+4. Currency Symbol: SepoliaETH
